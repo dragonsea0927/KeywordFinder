@@ -1,0 +1,75 @@
+<template>
+	<div class="header-wrapper">
+		<div class="header-div row">
+			<q-img src="../assets/Logo.svg" class="logo-img" />
+			<h1>KeywordFinder</h1>
+			<label>{{ version }}</label>
+		</div>
+		<div class="description-div text-left">
+			Der KeywordFinder ist eine Anwendung, um Ausschreibungstexte schnell und
+			effizient auszuwerten. Die Anwendung bietet die Möglichkeit, Texte in Form
+			von TXT, DocX, PDF oder String zu erfassen. In diesem Text werden die
+			zuvor definierten Tags entsprechend dem vordefiniertem Farbcode
+			hervorgehoben.
+		</div>
+	</div>
+</template>
+
+<script>
+import { defineComponent } from '@vue/runtime-core';
+import packageJson from '../../package.json';
+
+export default defineComponent({
+	name: 'HeaderComponent',
+
+	setup() {
+		return {
+			version: packageJson['version']
+		};
+	}
+});
+</script>
+
+<style lang="scss" scoped>
+@import '../css/mixin';
+
+.header-wrapper {
+	margin-top: 2rem;
+	width: 80%;
+
+	.header-div {
+		text-align: left;
+		@include noselect;
+
+		.logo-img {
+			width: 5rem;
+			height: auto;
+			align-content: center;
+		}
+
+		h1 {
+			font-size: 5rem;
+			font-weight: bold;
+			margin: 0 auto;
+			margin-left: 1rem;
+			margin-right: 0rem;
+			padding: auto;
+		}
+
+		label {
+			font-size: 1rem;
+			margin: 0 auto;
+			margin-left: 1rem;
+			margin-right: 0rem;
+			text-align: left;
+			width: 2.5rem;
+		}
+	}
+
+	.description-div {
+		max-width: 50rem;
+		margin: 1rem;
+		margin-right: 0;
+	}
+}
+</style>
