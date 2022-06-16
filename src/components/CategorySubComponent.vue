@@ -93,6 +93,7 @@ export default defineComponent({
 				this.category?.tags.push(tag);
 				this.newTag = '';
 			}
+			Session.save();
 		},
 
 		deleteTag(tag: string) {
@@ -101,6 +102,7 @@ export default defineComponent({
 				newTags.splice(newTags.indexOf(tag), 1);
 				this.category.tags = newTags;
 			}
+			Session.save();
 		},
 
 		updateName() {
@@ -118,10 +120,12 @@ export default defineComponent({
 				}
 				this.category.name = this.name;
 			}
+			Session.save();
 		},
 
 		changeColor() {
 			this.category.color = this.color;
+			Session.save();
 		}
 	}
 });

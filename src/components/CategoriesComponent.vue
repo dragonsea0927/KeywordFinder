@@ -191,6 +191,7 @@ export default defineComponent({
 			let session = Session.getInstance();
 
 			session.setCurrentProfile(this.profile);
+			Session.save();
 		},
 
 		prepareUpdateName() {
@@ -206,6 +207,7 @@ export default defineComponent({
 			this.profile.name = this.updateName;
 			this.updateProfileName = false;
 			this.saveProfile();
+			Session.save();
 		},
 
 		revertNameChanges() {
@@ -246,6 +248,7 @@ export default defineComponent({
 			this.profile = this.profiles[0];
 			session.setCurrentProfile(this.profile);
 			this.options = Array.from(this.profiles, (e) => e.name);
+			Session.save();
 		},
 
 		saveProfile() {
@@ -257,6 +260,7 @@ export default defineComponent({
 			let session = Session.getInstance();
 			session.setCurrentProfile(this.profile);
 			this.updateSelect();
+			Session.save();
 		},
 
 		newProfile() {
@@ -276,6 +280,7 @@ export default defineComponent({
 			session.setCurrentProfile(this.profile);
 
 			this.updateSelect();
+			Session.save();
 		},
 
 		addCategory() {
@@ -293,12 +298,14 @@ export default defineComponent({
 			);
 
 			session.setCurrentProfile(this.profile);
+			Session.save();
 		},
 
 		deleteCategorie(category: Category) {
 			let session = Session.getInstance();
 			this.profile.deleteCategorie(category);
 			session.setCurrentProfile(this.profile);
+			Session.save();
 		}
 	}
 });

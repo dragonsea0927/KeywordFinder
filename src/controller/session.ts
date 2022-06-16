@@ -17,9 +17,13 @@ export class Session {
 	 * @returns
 	 */
 	static getInstance() {
-		if (!Session.instance) {
+		if (!Session.instance && !Session.load()) {
 			Session.instance = new Session();
 		}
+		if (!Session.instance && Session.load()) {
+			Session.instance = <Session>Session.load();
+		}
+		Session.save();
 		return Session.instance;
 	}
 
@@ -48,6 +52,29 @@ export class Session {
 	}
 
 	/**
+	 * Sets instance to local storage
+	 */
+	public static save() {
+		localStorage.setItem('session', JSON.stringify(this.instance));
+	}
+
+	/**
+	 * Gets instance from local storage
+	 * @returns
+	 */
+	public static load(): Session | null {
+		const session = localStorage.getItem('session');
+		if (session) {
+			const obj = <Session>JSON.parse(session);
+			const result = new Session();
+			result.profiles = obj.profiles;
+			result.currentProfile = obj.currentProfile;
+			return result;
+		}
+		return null;
+	}
+
+	/**
 	 * Session id of session
 	 */
 	public readonly sessionId: string = Helper.getUUID();
@@ -72,6 +99,7 @@ export class Session {
 		} else {
 			this.currentProfile = this.profiles[0];
 		}
+		Session.save();
 	}
 
 }
