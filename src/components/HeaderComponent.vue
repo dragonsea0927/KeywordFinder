@@ -30,46 +30,40 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-@import '../css/mixin';
+<style lang="sass" scoped>
+@import '../css/mixin'
 
-.header-wrapper {
-	margin-top: 2rem;
-	width: 80%;
+.header-wrapper
+	margin-top: 2rem
+	width: 80%
 
-	.header-div {
-		text-align: left;
-		@include noselect;
+	.header-div
+		text-align: left
+		@include noselect
 
-		.logo-img {
-			width: 5rem;
-			height: auto;
-			align-content: center;
-		}
+		.logo-img
+			width: 5rem
+			height: auto
+			align-content: center
 
-		h1 {
-			font-size: 5rem;
-			font-weight: bold;
-			margin: 0 auto;
-			margin-left: 1rem;
-			margin-right: 0rem;
-			padding: auto;
-		}
+		h1
+			font-size: 5rem
+			font-weight: bold
+			margin: 0 auto
+			margin-left: 1rem
+			margin-right: 0rem
+			padding: auto
 
-		label {
-			font-size: 1rem;
-			margin: 0 auto;
-			margin-left: 1rem;
-			margin-right: 0rem;
-			text-align: left;
-			width: 2.5rem;
-		}
-	}
+		label
+			font-size: 1rem
+			margin: 0 auto
+			margin-left: 1rem
+			margin-right: 0rem
+			text-align: left
+			width: 2.5rem
 
-	.description-div {
-		max-width: 50rem;
-		margin: 1rem;
-		margin-right: 0;
-	}
-}
+	.description-div
+		max-width: 50rem
+		margin: 1rem
+		margin-right: 0
 </style>

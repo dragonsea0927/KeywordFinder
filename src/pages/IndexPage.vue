@@ -1,8 +1,8 @@
 <template>
 	<q-page class="row items-center justify-evenly">
-		<HeaderComponent />
-		<TextField />
-		<CategoriesComponent />
+		<HeaderComponent></HeaderComponent>
+		<TextField></TextField>
+		<CategoriesComponent></CategoriesComponent>
 	</q-page>
 </template>
 

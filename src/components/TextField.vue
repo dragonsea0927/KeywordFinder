@@ -134,31 +134,28 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-.text-field-form {
-	width: 80%;
-	box-shadow: 5px 5px 5px -2px rgba(0, 0, 0, 0.15);
-	border-radius: 0.7rem;
-	border-color: lightgrey;
-	border-style: solid;
-	border-width: thin;
-	height: 100%;
-	min-height: 30rem;
+<style lang="sass" scoped>
+.text-field-form
+	width: 80%
+	box-shadow: 5px 5px 5px -2px rgba(0, 0, 0, 0.15)
+	border-radius: 0.7rem
+	border-color: lightgrey
+	border-style: solid
+	border-width: thin
+	height: 100%
+	min-height: 30rem
 
-	.text-field-upload {
-		width: 100%;
-		height: auto;
-		box-shadow: none;
-		background-color: none;
-	}
+	.text-field-upload
+		width: 100%
+		height: auto
+		box-shadow: none
+		background-color: none
 
-	.text-field-input {
-		width: 98%;
-		border-style: none;
-		box-shadow: none;
-		padding: 0;
-		margin: 0 auto;
-		max-height: 30rem;
-	}
-}
+	.text-field-input
+		width: 98%
+		border-style: none
+		box-shadow: none
+		padding: 0
+		margin: 0 auto
+		max-height: 30rem
 </style>

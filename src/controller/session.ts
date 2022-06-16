@@ -75,6 +75,48 @@ export class Session {
 	}
 
 	/**
+	 * Gets profile export url
+	 * @returns profile export url
+	 */
+	public static getProfileExportUrl(): string {
+		let content = JSON.stringify(this.instance.currentProfile);
+		content = encodeURIComponent(content);
+		return 'data:application/json;charset=utf-8,' + content;
+	}
+
+	/**
+	 * Gets profiles export url
+	 * @returns profiles export url
+	 */
+	public static getProfilesExportUrl(): string {
+		let content = JSON.stringify(this.instance.profiles);
+		content = encodeURIComponent(content);
+		return 'data:application/json;charset=utf-8,' + content;
+	}
+
+	/**
+	 * Imports profile from json
+	 * @param json
+	 */
+	public static importProfileFromJson(json: string) {
+		const profile = <Profile>JSON.parse(json);
+		this.instance.profiles.push(profile);
+		this.instance.currentProfile = profile;
+		Session.save();
+	}
+
+	/**
+	 * Imports profiles from json
+	 * @param json
+	 */
+	public static importProfilesFromJson(json: string) {
+		const profiles = <Array<Profile>>JSON.parse(json);
+		this.instance.profiles = profiles;
+		this.instance.currentProfile = profiles[0];
+		Session.save();
+	}
+
+	/**
 	 * Session id of session
 	 */
 	public readonly sessionId: string = Helper.getUUID();

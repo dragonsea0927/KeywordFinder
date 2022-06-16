@@ -131,23 +131,20 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
-.color-circle {
-	width: 1.2rem;
-	height: 1.2rem;
-	border-radius: 50%;
-	display: inline-block;
-	margin-right: 8px;
-}
+<style lang="sass">
+.color-circle
+	width: 1.2rem
+	height: 1.2rem
+	border-radius: 50%
+	display: inline-block
+	margin-right: 8px
 
-.tag-zone {
-	margin-bottom: 8px;
-	width: 100%;
-	display: flexbox;
+.tag-zone
+	margin-bottom: 8px
+	width: 100%
+	display: flexbox
 
-	.q-field__control {
-		padding: 0;
-		min-height: 10rem;
-	}
-}
+	.q-field__control
+		padding: 0
+		min-height: 10rem
 </style>

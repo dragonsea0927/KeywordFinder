@@ -87,6 +87,7 @@
 				</q-card-actions>
 			</q-card>
 		</q-dialog>
+		<ImportExportComponent></ImportExportComponent>
 		<div class="row category-container">
 			<div class="row category-controls">
 				<p class="col-3">Kategorien</p>
@@ -160,12 +161,14 @@ import CategorySubComponent from './CategorySubComponent.vue';
 import { Helper } from 'src/controller/helper';
 import { Session } from 'src/controller/session';
 import { ref, defineComponent } from 'vue';
+import ImportExportComponent from 'src/components/ImportExportComponent.vue';
 
 export default defineComponent({
 	name: 'CategoriesComponent',
 
 	components: {
-		CategorySubComponent
+		CategorySubComponent,
+		ImportExportComponent
 	},
 
 	data: () => {
@@ -311,96 +314,86 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-@import '../css/mixin';
+<style lang="sass" scoped>
+@import '../css/mixin'
 
-.categories {
-	display: flex;
-	width: 100%;
-	flex-direction: column;
-	align-items: left;
-	justify-content: left;
-	margin-top: 1rem;
-	margin-bottom: 1rem;
-	margin-left: 10rem;
-	margin-right: 10rem;
+.categories
+	display: flex
+	width: 100%
+	flex-direction: column
+	align-items: left
+	justify-content: left
+	margin-top: 1rem
+	margin-bottom: 1rem
+	margin-left: 10rem
+	margin-right: 10rem
 
-	.row {
-		button {
-			margin-left: 1rem;
-			margin-right: 1rem;
-			max-height: 3rem;
-			margin-top: 0.3rem;
-		}
-	}
+	.row
+		button
+			margin-left: 1rem
+			margin-right: 1rem
+			max-height: 3rem
+			margin-top: 0.3rem
 
-	.category-container {
-		display: flex;
-		width: 100%;
-		border: 1px solid #ccc;
-		padding: 1.5rem;
-		border-radius: 0.5rem;
-		flex-direction: row;
-		align-items: left;
-		justify-content: left;
-		margin-top: 1rem;
-		margin-bottom: 1rem;
+	.category-container
+		display: flex
+		width: 100%
+		border: 1px solid #ccc
+		padding: 1.5rem
+		border-radius: 0.5rem
+		flex-direction: row
+		align-items: left
+		justify-content: left
+		margin-top: 1rem
+		margin-bottom: 1rem
 
-		.category-controls {
-			display: flex;
-			flex-direction: row;
-			width: 100%;
-			margin-bottom: 2rem;
-			padding-bottom: 2rem;
-			border-bottom: solid 1px #ccc;
+		.category-controls
+			display: flex
+			flex-direction: row
+			width: 100%
+			margin-bottom: 2rem
+			padding-bottom: 2rem
+			border-bottom: solid 1px #ccc
 
-			p {
-				font-size: 1.7rem;
-				margin-left: 0.2rem;
-				margin-right: 0.2rem;
-				margin-bottom: 0rem;
-				margin-top: 0.5rem;
-				color: #0085a6;
-				@include noselect;
-				text-transform: uppercase;
-			}
-		}
-	}
+			p
+				font-size: 1.7rem
+				margin-left: 0.2rem
+				margin-right: 0.2rem
+				margin-bottom: 0rem
+				margin-top: 0.5rem
+				color: #0085a6
+				@include noselect
+				text-transform: uppercase
 
-	.categories-title {
-		display: block;
-		flex-direction: row;
-		width: 100%;
-		font-size: 1.5rem;
-		height: 6rem;
-		font-weight: bold;
-		color: #0085a6;
-		text-transform: uppercase;
-		@include noselect;
-	}
+	.categories-title
+		display: block
+		flex-direction: row
+		width: 100%
+		font-size: 1.5rem
+		height: 6rem
+		font-weight: bold
+		color: #0085a6
+		text-transform: uppercase
+		@include noselect
 
-	.category-item {
-		border: 1px solid #ccc;
-		padding: 1.5rem;
-		border-radius: 0.5rem;
-		margin-right: 1rem;
-		margin-bottom: 1rem;
-		width: 24rem;
-	}
+	.category-item
+		border: 1px solid #ccc
+		padding: 1.5rem
+		border-radius: 0.5rem
+		margin-right: 1rem
+		margin-bottom: 1rem
+		width: 24rem
 
-	.deleteCategories {
-		display: block;
-		flex-direction: row;
-		width: 100%;
-		font-size: 1.5rem;
-		height: 6rem;
-		font-weight: bold;
-		color: #0085a6;
-		text-transform: uppercase;
-	}
+	.deleteCategories
+		display: block
+		flex-direction: row
+		width: 100%
+		font-size: 1.5rem
+		height: 6rem
+		font-weight: bold
+		color: #0085a6
+		text-transform: uppercase
 
-	.editProfileName {
-		background-color: #ffc107;
-	}
-}
+	.editProfileName
+		background-color: #ffc107
 </style>
