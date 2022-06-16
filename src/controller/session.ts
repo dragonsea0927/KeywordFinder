@@ -75,6 +75,20 @@ export class Session {
 	}
 
 	/**
+	 * Reloads session
+	 */
+	public static reloadSession() {
+		const session = localStorage.getItem('session');
+		if (session) {
+			const obj = <Session>JSON.parse(session);
+			const result = new Session();
+			result.profiles = obj.profiles;
+			result.currentProfile = obj.currentProfile;
+			Session.instance = result;
+		}
+	}
+
+	/**
 	 * Gets profile export url
 	 * @returns profile export url
 	 */

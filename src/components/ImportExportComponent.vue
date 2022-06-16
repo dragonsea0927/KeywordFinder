@@ -82,6 +82,7 @@ export default defineComponent({
 				};
 				reader.readAsText(file);
 			}
+			Session.reloadSession();
 		},
 
 		uploadProfiles() {
@@ -94,6 +95,7 @@ export default defineComponent({
 				};
 				reader.readAsText(file);
 			}
+			Session.reloadSession();
 		},
 
 		onRejected(file: QRejectedEntry[]) {

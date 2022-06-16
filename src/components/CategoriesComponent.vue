@@ -188,6 +188,10 @@ export default defineComponent({
 		};
 	},
 
+	mounted() {
+		this.updateLoop();
+	},
+
 	methods: {
 		onInput(value: string) {
 			this.profile = <Profile>this.profiles.find((e) => e.name === value);
@@ -309,6 +313,21 @@ export default defineComponent({
 			this.profile.deleteCategorie(category);
 			session.setCurrentProfile(this.profile);
 			Session.save();
+		},
+
+		async updateInstanze() {
+			let session = Session.getInstance();
+			this.options = Array.from(this.profiles, (e) => e.name);
+			this.profiles = session.profiles;
+			this.profile = session.currentProfile;
+			this.updateSelect();
+		},
+
+		async updateLoop() {
+			while (true) {
+				this.updateInstanze();
+				await Helper.sleep(1000);
+			}
 		}
 	}
 });
