@@ -1,5 +1,5 @@
+import { H } from 'friendly-helper';
 import { Category } from './CategoryModel';
-import { Helper } from '../controller/helper';
 
 /**
  * Profile model
@@ -26,7 +26,7 @@ export class Profile {
 	 */
 	constructor(name: string) {
 		this.categories = [];
-		this.id = Helper.getUUID();
+		this.id = H.guid.generate();
 		this.name = name;
 	}
 

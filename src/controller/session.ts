@@ -1,6 +1,6 @@
 import { Category } from 'src/models/CategoryModel';
 import { Profile } from 'src/models/ProfileModel';
-import { Helper } from './helper';
+import { H } from 'friendly-helper'
 
 /**
  * Session
@@ -38,10 +38,10 @@ export class Session {
 			for (let i = 1; i < 4; i++) {
 				profile.addCategory(
 					new Category(
-						Helper.getUUID(),
+						H.guid.generate(),
 						'Kategorie ' + i,
-						Helper.getRandomColor(),
-						Helper.getRandomWords(Helper.getRandomInt(1, 10))
+						H.color.generateRandomHex(),
+						H.random.generateWordsArray(H.random.generateNumber(1, 10))
 					)
 				);
 			}
@@ -133,7 +133,7 @@ export class Session {
 	/**
 	 * Session id of session
 	 */
-	public readonly sessionId: string = Helper.getUUID();
+	public readonly sessionId: string = H.guid.generate();
 
 	/**
 	 * Profiles  of session

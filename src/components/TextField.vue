@@ -43,7 +43,7 @@
 
 <script lang="ts">
 import { useQuasar } from 'quasar';
-import { Helper } from 'src/controller/helper';
+import { H } from 'friendly-helper';
 import { Session } from 'src/controller/session';
 import { Category } from 'src/models/CategoryModel';
 import { defineComponent, ref } from 'vue';
@@ -77,16 +77,16 @@ export default defineComponent({
 	methods: {
 		onInput(value: string) {
 			this.text = this.generateFilteredTextForCategories(
-				Helper.stripHTML(value)
+				H.string.purgeHtml(value)
 			);
 		},
 
 		async rerender(object: Session) {
 			while (object) {
 				this.text = this.generateFilteredTextForCategories(
-					Helper.stripHTML(this.text)
+					H.string.purgeHtml(this.text)
 				);
-				await Helper.sleep(1000);
+				await H.general.sleep(1000);
 			}
 		},
 
@@ -98,7 +98,7 @@ export default defineComponent({
 			let filteredText = text;
 			let brightness = '';
 
-			if (Helper.colorLightOrDark(color) === 'dark') {
+			if (H.color.isDark(color)) {
 				brightness = 'color:white';
 			}
 
