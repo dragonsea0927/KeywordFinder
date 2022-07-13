@@ -3,8 +3,9 @@
 		<q-file
 			class="q-pa-md text-field-upload"
 			label="Upload [Beschränkt auf Textdateien]"
-			accept=".pdf, .txt, .docx"
+			accept=".txt"
 			v-model="file"
+			@update:model-value="onFileInput"
 			use-chips
 			rounded
 			auto-upload
@@ -47,6 +48,7 @@ import { H } from 'friendly-helper';
 import { Session } from 'src/controller/session';
 import { Category } from 'src/models/CategoryModel';
 import { defineComponent, ref } from 'vue';
+import ContentFileReader from 'src/controller/contentFileReader';
 
 export default defineComponent({
 	name: 'TextField',
@@ -81,6 +83,13 @@ export default defineComponent({
 			);
 		},
 
+		async onFileInput(f: File) {
+			const content = new ContentFileReader(f);
+			this.text = this.generateFilteredTextForCategories(
+				H.string.purgeHtml(await content.getContent())
+			);
+		},
+
 		async rerender(object: Session) {
 			while (object) {
 				this.text = this.generateFilteredTextForCategories(
@@ -95,7 +104,7 @@ export default defineComponent({
 			color: string,
 			text: string
 		): string {
-			let filteredText = text;
+			let filteredText = text.replace('&', '');
 			let brightness = '';
 
 			if (H.color.isDark(color)) {

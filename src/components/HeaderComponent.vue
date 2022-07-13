@@ -8,9 +8,8 @@
 		<div class="description-div text-left">
 			Der KeywordFinder ist eine Anwendung, um Ausschreibungstexte schnell und
 			effizient auszuwerten. Die Anwendung bietet die Möglichkeit, Texte in Form
-			von TXT, DocX, PDF oder String zu erfassen. In diesem Text werden die
-			zuvor definierten Tags entsprechend dem vordefiniertem Farbcode
-			hervorgehoben.
+			von TXT Files oder Strings zu erfassen. In diesem Text werden die zuvor
+			definierten Tags entsprechend dem vordefiniertem Farbcode hervorgehoben.
 		</div>
 		<div id="message_container"></div>
 	</div>
