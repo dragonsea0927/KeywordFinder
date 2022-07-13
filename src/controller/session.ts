@@ -235,11 +235,13 @@ export class Session {
 	 * Resets session
 	 */
 	public static resetSession() {
+		const msg = new Message();
 		localStorage.removeItem('session');
 		sessionStorage.removeItem('session');
 		this.instance = new Session();
 		Session.save();
 		location.reload();
+		msg.info('Session wurde zurückgesetzt');
 	}
 
 }
