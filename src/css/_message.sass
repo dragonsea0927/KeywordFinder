@@ -1,0 +1,32 @@
+@import "mixin"
+
+#message_container
+	padding: 1rem
+	margin-bottom: 1rem
+	width: 30em
+	position: fixed
+	right: 0
+	top: 0
+
+	.material-icons
+		font-size: 3rem
+
+	.success_message
+		color: #4caf50
+		background-color: #e8f5e9
+		@include message
+
+	.error_message
+		color: #f44336
+		background-color: #ffebee
+		@include message
+
+	.warning_message
+		color: #ff9800
+		background-color: #fffde7
+		@include message
+
+	.info_message
+		color: #2196f3
+		background-color: #e3f2fd
+		@include message

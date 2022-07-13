@@ -1,6 +1,7 @@
 import { Category } from 'src/models/CategoryModel';
 import { Profile } from 'src/models/ProfileModel';
 import { H } from 'friendly-helper'
+import Message from './message';
 
 /**
  * Session
@@ -114,6 +115,18 @@ export class Session {
 	 */
 	public static importProfileFromJson(json: string) {
 		const profile = <Profile>JSON.parse(json);
+		const msg = new Message();
+
+		if (this.instance.profiles.find(p => p.name === profile.name)) {
+			msg.error('Profile with name ' + profile.name + ' already exists');
+			return;
+		}
+
+		if (this.instance.profiles.find(p => p.id === profile.id)) {
+			msg.error('Profile with id ' + profile.id + ' already exists');
+			return;
+		}
+
 		this.instance.profiles.push(profile);
 		this.instance.currentProfile = profile;
 		Session.save();
@@ -125,9 +138,19 @@ export class Session {
 	 */
 	public static importProfilesFromJson(json: string) {
 		const profiles = <Array<Profile>>JSON.parse(json);
-		this.instance.profiles = profiles;
-		this.instance.currentProfile = profiles[0];
+
+		profiles.forEach(profile => {
+			if (
+				!this.instance.profiles.find(p => p.name === profile.name)
+				&& !this.instance.profiles.find(p => p.id === profile.id)
+			) {
+				this.instance.profiles.push(profile);
+				this.instance.currentProfile = profile;
+			}
+
+		});
 		Session.save();
+		Session.reloadSession();
 	}
 
 	/**
@@ -156,6 +179,7 @@ export class Session {
 			this.currentProfile = this.profiles[0];
 		}
 		Session.save();
+		Session.reloadSession();
 	}
 
 }
