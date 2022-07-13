@@ -12,6 +12,7 @@
 			zuvor definierten Tags entsprechend dem vordefiniertem Farbcode
 			hervorgehoben.
 		</div>
+		<div id="message_container"></div>
 	</div>
 </template>
 
@@ -30,8 +31,9 @@ export default defineComponent({
 });
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 @import '../css/mixin'
+@import '../css/message'
 
 .header-wrapper
 	margin-top: 2rem
