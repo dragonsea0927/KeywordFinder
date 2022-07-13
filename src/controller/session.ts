@@ -25,6 +25,7 @@ export class Session {
 			Session.instance = <Session>Session.load();
 		}
 		Session.save();
+		localStorage.removeItem('session');
 		return Session.instance;
 	}
 
@@ -109,12 +110,20 @@ export class Session {
 		return 'data:application/json;charset=utf-8,' + content;
 	}
 
+	private static reBuildProfile(data: Profile) {
+		const profile = new Profile(data.name);
+		profile.id = data.id;
+		profile.categories = data.categories;
+		return profile;
+	}
+
 	/**
 	 * Imports profile from json
 	 * @param json
 	 */
 	public static importProfileFromJson(json: string) {
-		const profile = <Profile>JSON.parse(json);
+		const data = <Profile>JSON.parse(json);
+		const profile = Session.reBuildProfile(data);
 		const msg = new Message();
 
 		if (this.instance.profiles.find(p => p.name === profile.name)) {
@@ -139,7 +148,8 @@ export class Session {
 	public static importProfilesFromJson(json: string) {
 		const profiles = <Array<Profile>>JSON.parse(json);
 
-		profiles.forEach(profile => {
+		profiles.forEach(data => {
+			const profile = Session.reBuildProfile(data);
 			if (
 				!this.instance.profiles.find(p => p.name === profile.name)
 				&& !this.instance.profiles.find(p => p.id === profile.id)
@@ -150,7 +160,6 @@ export class Session {
 
 		});
 		Session.save();
-		Session.reloadSession();
 	}
 
 	/**
@@ -179,7 +188,6 @@ export class Session {
 			this.currentProfile = this.profiles[0];
 		}
 		Session.save();
-		Session.reloadSession();
 	}
 
 }

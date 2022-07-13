@@ -175,6 +175,7 @@ export default defineComponent({
 		let session: Session = Session.getInstance();
 
 		return {
+			session: ref(session),
 			options: ref(Array.from(session.profiles, (e) => e.name)),
 			profiles: ref(session.profiles),
 			profile: ref(session.profiles[0]),
