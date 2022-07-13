@@ -37,12 +37,17 @@ export class Session {
 		for (let i = 1; i < 4; i++) {
 			const profile = new Profile('Default ' + i);
 			for (let i = 1; i < 4; i++) {
+
+				let words = H.random.generateWordArray(H.random.generateNumber(1, 10));
+
+				words = words.filter(w => !!w);
+
 				profile.addCategory(
 					new Category(
 						H.guid.generate(),
 						'Kategorie ' + i,
 						H.color.generateRandomHex(),
-						H.random.generateWordsArray(H.random.generateNumber(1, 10))
+						words
 					)
 				);
 			}
