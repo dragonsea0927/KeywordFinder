@@ -9,14 +9,47 @@
 					</span>
 					<a :href="repository" target="_blank">View on GitHub</a>
 				</p>
+				<q-btn
+					@click="confirmDelete = true"
+					color="red"
+					text-color="white"
+					label="App zurücksetzen"
+				></q-btn>
 			</div>
 		</div>
+		<q-dialog v-model="confirmDelete" persistent>
+			<q-card>
+				<q-card-section class="row items-center">
+					<q-avatar
+						icon="delete_forever"
+						color="primary"
+						text-color="white"
+					></q-avatar>
+					<span class="q-ml-sm"
+						>Möchten Sie die App wirklich vollständig Zurücksetzen?</span
+					>
+				</q-card-section>
+
+				<q-card-actions align="right">
+					<q-btn flat label="Abbrechen" color="black" v-close-popup></q-btn>
+					<q-btn
+						flat
+						label="Löschen"
+						color="red"
+						@click="reset"
+						v-close-popup
+					></q-btn>
+				</q-card-actions>
+			</q-card>
+		</q-dialog>
 	</footer>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from '@vue/runtime-core';
 import packageJson from '../../package.json';
+import { Session } from 'src/controller/session';
+import { ref } from 'vue';
 
 export default defineComponent({
 	name: 'FooterComponent',
@@ -27,6 +60,18 @@ export default defineComponent({
 			repository: packageJson['homepage'],
 			year: new Date().getFullYear()
 		};
+	},
+
+	data: () => {
+		return {
+			confirmDelete: ref(false)
+		};
+	},
+
+	methods: {
+		reset() {
+			Session.resetSession();
+		}
 	}
 });
 </script>

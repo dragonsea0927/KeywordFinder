@@ -25,7 +25,6 @@ export class Session {
 			Session.instance = <Session>Session.load();
 		}
 		Session.save();
-		localStorage.removeItem('session');
 		return Session.instance;
 	}
 
@@ -69,8 +68,8 @@ export class Session {
 		if (session) {
 			const obj = <Session>JSON.parse(session);
 			const result = new Session();
-			result.profiles = obj.profiles;
-			result.currentProfile = obj.currentProfile;
+			result.profiles = Session.reBuildProfiles(obj.profiles);
+			result.currentProfile = Session.reBuildProfile(obj.currentProfile);
 			return result;
 		}
 		return null;
@@ -84,8 +83,8 @@ export class Session {
 		if (session) {
 			const obj = <Session>JSON.parse(session);
 			const result = new Session();
-			result.profiles = obj.profiles;
-			result.currentProfile = obj.currentProfile;
+			result.profiles = Session.reBuildProfiles(obj.profiles);
+			result.currentProfile = Session.reBuildProfile(obj.currentProfile);
 			Session.instance = result;
 		}
 	}
@@ -110,6 +109,11 @@ export class Session {
 		return 'data:application/json;charset=utf-8,' + content;
 	}
 
+	/**
+	 * Re build profile
+	 * @param data
+	 * @returns
+	 */
 	private static reBuildProfile(data: Profile) {
 		const profile = new Profile(data.name);
 		profile.id = data.id;
@@ -118,13 +122,32 @@ export class Session {
 	}
 
 	/**
+	 * Re build profiles
+	 * @param data
+	 * @returns
+	 */
+	private static reBuildProfiles(data: Array<Profile>) {
+		const profiles = new Array<Profile>();
+		for (let i = 0; i < data.length; i++) {
+			profiles.push(Session.reBuildProfile(data[i]));
+		}
+		return profiles;
+	}
+
+	/**
 	 * Imports profile from json
 	 * @param json
 	 */
 	public static importProfileFromJson(json: string) {
 		const data = <Profile>JSON.parse(json);
-		const profile = Session.reBuildProfile(data);
 		const msg = new Message();
+
+		if (!data.id || !data.name || !data.categories) {
+			msg.error('Import fehlgeschlagen');
+			return;
+		}
+
+		const profile = Session.reBuildProfile(data);
 
 		if (this.instance.profiles.find(p => p.name === profile.name)) {
 			msg.error('Profile with name ' + profile.name + ' already exists');
@@ -147,18 +170,31 @@ export class Session {
 	 */
 	public static importProfilesFromJson(json: string) {
 		const profiles = <Array<Profile>>JSON.parse(json);
+		const msg = new Message();
 
-		profiles.forEach(data => {
-			const profile = Session.reBuildProfile(data);
-			if (
-				!this.instance.profiles.find(p => p.name === profile.name)
-				&& !this.instance.profiles.find(p => p.id === profile.id)
-			) {
-				this.instance.profiles.push(profile);
-				this.instance.currentProfile = profile;
-			}
+		try {
 
-		});
+			profiles.forEach(data => {
+
+				if (!data.id || !data.name || !data.categories) {
+					msg.error('Import fehlgeschlagen');
+					return;
+				}
+
+				const profile = Session.reBuildProfile(data);
+				if (
+					!this.instance.profiles.find(p => p.name === profile.name)
+					&& !this.instance.profiles.find(p => p.id === profile.id)
+				) {
+					this.instance.profiles.push(profile);
+					this.instance.currentProfile = profile;
+				}
+
+			});
+
+		} catch {
+			msg.error('Import fehlgeschlagen');
+		}
 		Session.save();
 	}
 
@@ -181,13 +217,24 @@ export class Session {
 	 * Sets current profile
 	 * @param profile
 	 */
-	setCurrentProfile(profile: Profile) {
+	public setCurrentProfile(profile: Profile) {
 		if (this.profiles.find(p => p.name === profile.name)) {
 			this.currentProfile = <Profile>this.profiles.find(p => p.name === profile.name);
 		} else {
 			this.currentProfile = this.profiles[0];
 		}
 		Session.save();
+	}
+
+	/**
+	 * Resets session
+	 */
+	public static resetSession() {
+		localStorage.removeItem('session');
+		sessionStorage.removeItem('session');
+		this.instance = new Session();
+		Session.save();
+		location.reload();
 	}
 
 }
