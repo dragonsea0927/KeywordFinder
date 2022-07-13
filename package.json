@@ -1,10 +1,15 @@
 {
 	"name": "keyword-finder",
-	"version": "0.3.1",
+	"version": "1.0.0",
 	"description": "A Quasar Project",
 	"productName": "KeywordFinder",
 	"author": "Jonas Pfalzgraf <info@josunlp.de>",
 	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:JosunLP/KeywordFinder.git"
+	},
+	"homepage": "https://github.com/JosunLP/KeywordFinder",
 	"scripts": {
 		"dev": "quasar dev",
 		"build": "quasar build",

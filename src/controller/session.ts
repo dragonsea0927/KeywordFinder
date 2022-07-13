@@ -1,6 +1,7 @@
 import { Category } from 'src/models/CategoryModel';
 import { Profile } from 'src/models/ProfileModel';
 import { H } from 'friendly-helper'
+import Message from './message';
 
 /**
  * Session
@@ -36,12 +37,17 @@ export class Session {
 		for (let i = 1; i < 4; i++) {
 			const profile = new Profile('Default ' + i);
 			for (let i = 1; i < 4; i++) {
+
+				let words = H.random.generateWordArray(H.random.generateNumber(1, 10));
+
+				words = words.filter(w => !!w);
+
 				profile.addCategory(
 					new Category(
 						H.guid.generate(),
 						'Kategorie ' + i,
 						H.color.generateRandomHex(),
-						H.random.generateWordsArray(H.random.generateNumber(1, 10))
+						words
 					)
 				);
 			}
@@ -67,8 +73,8 @@ export class Session {
 		if (session) {
 			const obj = <Session>JSON.parse(session);
 			const result = new Session();
-			result.profiles = obj.profiles;
-			result.currentProfile = obj.currentProfile;
+			result.profiles = Session.reBuildProfiles(obj.profiles);
+			result.currentProfile = Session.reBuildProfile(obj.currentProfile);
 			return result;
 		}
 		return null;
@@ -82,8 +88,8 @@ export class Session {
 		if (session) {
 			const obj = <Session>JSON.parse(session);
 			const result = new Session();
-			result.profiles = obj.profiles;
-			result.currentProfile = obj.currentProfile;
+			result.profiles = Session.reBuildProfiles(obj.profiles);
+			result.currentProfile = Session.reBuildProfile(obj.currentProfile);
 			Session.instance = result;
 		}
 	}
@@ -109,11 +115,55 @@ export class Session {
 	}
 
 	/**
+	 * Re build profile
+	 * @param data
+	 * @returns
+	 */
+	private static reBuildProfile(data: Profile) {
+		const profile = new Profile(data.name);
+		profile.id = data.id;
+		profile.categories = data.categories;
+		return profile;
+	}
+
+	/**
+	 * Re build profiles
+	 * @param data
+	 * @returns
+	 */
+	private static reBuildProfiles(data: Array<Profile>) {
+		const profiles = new Array<Profile>();
+		for (let i = 0; i < data.length; i++) {
+			profiles.push(Session.reBuildProfile(data[i]));
+		}
+		return profiles;
+	}
+
+	/**
 	 * Imports profile from json
 	 * @param json
 	 */
 	public static importProfileFromJson(json: string) {
-		const profile = <Profile>JSON.parse(json);
+		const data = <Profile>JSON.parse(json);
+		const msg = new Message();
+
+		if (!data.id || !data.name || !data.categories) {
+			msg.error('Import fehlgeschlagen');
+			return;
+		}
+
+		const profile = Session.reBuildProfile(data);
+
+		if (this.instance.profiles.find(p => p.name === profile.name)) {
+			msg.error('Profile with name ' + profile.name + ' already exists');
+			return;
+		}
+
+		if (this.instance.profiles.find(p => p.id === profile.id)) {
+			msg.error('Profile with id ' + profile.id + ' already exists');
+			return;
+		}
+
 		this.instance.profiles.push(profile);
 		this.instance.currentProfile = profile;
 		Session.save();
@@ -125,8 +175,31 @@ export class Session {
 	 */
 	public static importProfilesFromJson(json: string) {
 		const profiles = <Array<Profile>>JSON.parse(json);
-		this.instance.profiles = profiles;
-		this.instance.currentProfile = profiles[0];
+		const msg = new Message();
+
+		try {
+
+			profiles.forEach(data => {
+
+				if (!data.id || !data.name || !data.categories) {
+					msg.error('Import fehlgeschlagen');
+					return;
+				}
+
+				const profile = Session.reBuildProfile(data);
+				if (
+					!this.instance.profiles.find(p => p.name === profile.name)
+					&& !this.instance.profiles.find(p => p.id === profile.id)
+				) {
+					this.instance.profiles.push(profile);
+					this.instance.currentProfile = profile;
+				}
+
+			});
+
+		} catch {
+			msg.error('Import fehlgeschlagen');
+		}
 		Session.save();
 	}
 
@@ -149,13 +222,26 @@ export class Session {
 	 * Sets current profile
 	 * @param profile
 	 */
-	setCurrentProfile(profile: Profile) {
+	public setCurrentProfile(profile: Profile) {
 		if (this.profiles.find(p => p.name === profile.name)) {
 			this.currentProfile = <Profile>this.profiles.find(p => p.name === profile.name);
 		} else {
 			this.currentProfile = this.profiles[0];
 		}
 		Session.save();
+	}
+
+	/**
+	 * Resets session
+	 */
+	public static resetSession() {
+		const msg = new Message();
+		localStorage.removeItem('session');
+		sessionStorage.removeItem('session');
+		this.instance = new Session();
+		Session.save();
+		location.reload();
+		msg.info('Session wurde zurückgesetzt');
 	}
 
 }

@@ -26,13 +26,13 @@
 		</div>
 		<div class="vl"></div>
 		<div class="export-multible">
-			<q-btn @click="downloadProfile()"
+			<q-btn @click="downloadProfiles()"
 				><q-icon name="download" class="cursor-pointer"></q-icon>all
 				profiles</q-btn
 			>
 		</div>
 		<div class="import-multible">
-			<q-btn @click="uploadProfile()"
+			<q-btn @click="uploadProfiles()"
 				><q-icon name="upload" class="cursor-pointer"></q-icon>multible
 				profiles</q-btn
 			>
