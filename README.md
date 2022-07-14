@@ -1,6 +1,11 @@
 # KeywordFinder
 
-[![CodeFactor](https://www.codefactor.io/repository/github/josunlp/keywordfinder/badge)](https://www.codefactor.io/repository/github/josunlp/keywordfinder)
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
+[![GitHub issues](https://img.shields.io/github/issues/JosunLP/KeywordFinder)](https://github.com/JosunLP/KeywordFinder/issues)
+[![CodeFactor](https://www.codefactor.io/repository/github/josunlp/KeywordFinder/badge)](https://www.codefactor.io/repository/github/josunlp/KeywordFinder)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/josunlp/KeywordFinder)
+![GitHub top language](https://img.shields.io/github/languages/top/josunlp/KeywordFinder)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/josunlp/KeywordFinder)
 
 ## Menü
 

@@ -1,6 +1,6 @@
 {
 	"name": "keyword-finder",
-	"version": "1.1.1",
+	"version": "1.2.0",
 	"description": "A Quasar Project",
 	"productName": "KeywordFinder",
 	"author": {
@@ -24,7 +24,7 @@
 	"dependencies": {
 		"@quasar/extras": "^1.0.0",
 		"core-js": "^3.6.5",
-		"friendly-helper": "^1.5.0",
+		"friendly-helper": "^1.6.2",
 		"quasar": "^2.6.0",
 		"vue": "^3.0.0",
 		"vue-router": "^4.0.0"
