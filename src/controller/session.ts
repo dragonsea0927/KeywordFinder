@@ -13,6 +13,8 @@ export class Session {
 	 */
 	private static instance: Session;
 
+	private static msg = new Message();
+
 	/**
 	 * Gets instance
 	 * @returns
@@ -141,28 +143,29 @@ export class Session {
 	 */
 	public static importProfileFromJson(json: string) {
 		const data = <Profile>JSON.parse(json);
-		const msg = new Message();
 
 		if (!data.id || !data.name || !data.categories) {
-			msg.error('Import fehlgeschlagen');
+			this.msg.error('Import fehlgeschlagen');
 			return;
 		}
 
 		const profile = Session.reBuildProfile(data);
 
 		if (this.instance.profiles.find(p => p.name === profile.name)) {
-			msg.error('Profile with name ' + profile.name + ' already exists');
+			this.msg.error('Profile with name ' + profile.name + ' already exists');
 			return;
 		}
 
 		if (this.instance.profiles.find(p => p.id === profile.id)) {
-			msg.error('Profile with id ' + profile.id + ' already exists');
+			this.msg.error('Profile with id ' + profile.id + ' already exists');
 			return;
 		}
 
 		this.instance.profiles.push(profile);
 		this.instance.currentProfile = profile;
 		Session.save();
+		location.reload();
+		this.msg.success('Profile wurde importiert');
 	}
 
 	/**
@@ -171,14 +174,13 @@ export class Session {
 	 */
 	public static importProfilesFromJson(json: string) {
 		const profiles = <Array<Profile>>JSON.parse(json);
-		const msg = new Message();
 
 		try {
 
 			profiles.forEach(data => {
 
 				if (!data.id || !data.name || !data.categories) {
-					msg.error('Import fehlgeschlagen');
+					this.msg.error('Import fehlgeschlagen');
 					return;
 				}
 
@@ -194,9 +196,11 @@ export class Session {
 			});
 
 		} catch {
-			msg.error('Import fehlgeschlagen');
+			this.msg.error('Import fehlgeschlagen');
 		}
 		Session.save();
+		location.reload();
+		this.msg.success('Profile wurde importiert');
 	}
 
 	/**
@@ -231,13 +235,12 @@ export class Session {
 	 * Resets session
 	 */
 	public static resetSession() {
-		const msg = new Message();
 		localStorage.removeItem('session');
 		sessionStorage.removeItem('session');
 		this.instance = new Session();
 		Session.save();
 		location.reload();
-		msg.info('Session wurde zurückgesetzt');
+		this.msg.info('Session wurde zurückgesetzt');
 	}
 
 }

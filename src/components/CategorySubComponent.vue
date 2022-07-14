@@ -67,14 +67,7 @@ export default defineComponent({
 	},
 
 	mounted() {
-		const cat: Category =
-			session.profiles
-				?.find((e) => e.id === this.profileId)
-				?.categories?.find((e) => e.id === this.categoryId) ??
-			new Category('', '', '', []);
-		this.category = cat;
-		this.name = this.category.name;
-		this.color = this.category.color;
+		this.getCategory();
 	},
 
 	methods: {
@@ -127,6 +120,17 @@ export default defineComponent({
 		changeColor() {
 			this.category.color = this.color;
 			Session.save();
+		},
+
+		getCategory() {
+			const cat: Category =
+				session.profiles
+					?.find((e) => e.id === this.profileId)
+					?.categories?.find((e) => e.id === this.categoryId) ??
+				new Category('', '', '', []);
+			this.category = cat;
+			this.name = this.category.name;
+			this.color = this.category.color;
 		}
 	}
 });
