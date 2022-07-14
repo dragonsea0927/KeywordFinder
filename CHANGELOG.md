@@ -8,6 +8,8 @@ All notable changes to this project are documented in this file.
 
 - [Changelog](#changelog)
   - [Menu](#menu)
+  - [[1.2.0]](#120)
+    - [License](#license)
   - [[1.1.1]](#111)
     - [Bug fix Category loading](#bug-fix-category-loading)
   - [[1.1.0]](#110)
@@ -21,17 +23,24 @@ All notable changes to this project are documented in this file.
 
 ---
 
+## [1.2.0]
+
+### License
+
+- This Project is licensed under the MPL 2.0 license.
+- Dependency updates
+
 ## [1.1.1]
 
 ### Bug fix Category loading
 
-- A bug was fixed, that prevented the category loading when one or more Profiles were uploadet.
+- A bug was fixed, that prevented the category loading when one or more Profiles were uploaded.
 
 ## [1.1.0]
 
 ### Optic overhaul
 
-- A complete overhaul of all assests
+- A complete overhaul of all assets
 - Optimizing the look and feel
 
 ## [1.0.0]
