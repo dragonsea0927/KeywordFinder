@@ -93,7 +93,7 @@ export default defineComponent({
 		async rerender(object: Session) {
 			while (object) {
 				this.text = this.generateFilteredTextForCategories(
-					H.string.purgeHtml(this.text)
+					H.string.purgeAll(this.text)
 				);
 				await H.general.sleep(1000);
 			}
@@ -104,9 +104,9 @@ export default defineComponent({
 			color: string,
 			text: string
 		): string {
-			let filteredText = text.replace('&', '');
+			let filteredText = text.replaceAll('&', '');
+			filteredText = filteredText.replaceAll('\\', '');
 			let brightness = '';
-
 			if (H.color.isDark(color)) {
 				brightness = 'color:white';
 			}

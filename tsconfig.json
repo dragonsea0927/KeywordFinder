@@ -1,6 +1,8 @@
 {
-  "extends": "@quasar/app-webpack/tsconfig-preset",
-  "compilerOptions": {
-    "baseUrl": "."
-  }
+	"extends": "@quasar/app-webpack/tsconfig-preset",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"target": "ESNEXT",
+		"lib": ["esnext", "dom"]
+	}
 }
