@@ -105,6 +105,7 @@ export default defineComponent({
 });
 </script>
 <style lang="sass" scoped>
+@import '../css/mixin'
 
 .impor-export-wrapper
 	display: flex
@@ -121,10 +122,7 @@ export default defineComponent({
 		flex-direction: column
 
 		button
-			margin: 0.5rem
-			padding: 0.7rem
-			background-color: #1976d2
-			color: white
+			@include basicButton
 			width: 3rem
 			height: 3rem
 			border-radius: 2rem
@@ -135,10 +133,7 @@ export default defineComponent({
 		flex-direction: column
 
 		button
-			margin: 0.5rem
-			padding: 0.7rem
-			background-color: #1976d2
-			color: white
+			@include basicButton
 			width: 3rem
 			height: 3rem
 			border-radius: 2rem
@@ -151,22 +146,12 @@ export default defineComponent({
 	.export-multible
 
 		button
-			margin: 0.5rem
-			padding: 0.7rem
-			background-color: #1976d2
-			color: white
-			height: 3rem
 			width: 10rem
-			border-radius: 1rem
+			@include basicButton
 
 	.import-multible
 
 		button
-			margin: 0.5rem
-			padding: 0.7rem
-			background-color: #1976d2
-			color: white
-			height: 3rem
+			@include basicButton
 			width: 12rem
-			border-radius: 1rem
 </style>

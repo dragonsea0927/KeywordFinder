@@ -12,8 +12,9 @@
 					<q-popup-proxy cover transition-show="scale" transition-hide="scale">
 						<q-color v-model="color" @change="changeColor"></q-color>
 					</q-popup-proxy>
-				</q-icon> </template
-		></q-input>
+				</q-icon>
+			</template>
+		</q-input>
 		<div class="q-pa-md">
 			<q-input
 				v-model="newTag"

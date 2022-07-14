@@ -43,7 +43,7 @@ export default defineComponent({
 		@include noselect
 
 		.logo-img
-			width: 5rem
+			width: 6rem
 			height: auto
 			align-content: center
 
@@ -60,6 +60,8 @@ export default defineComponent({
 			margin: 0 auto
 			margin-left: 1rem
 			margin-right: 0rem
+			margin-top: 0.5rem
+			padding: auto
 			text-align: left
 			width: 2.5rem
 

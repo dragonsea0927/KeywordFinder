@@ -34,26 +34,22 @@ export class Session {
 	private constructor() {
 		this.profiles = new Array<Profile>();
 
-		for (let i = 1; i < 4; i++) {
-			const profile = new Profile('Default ' + i);
-			for (let i = 1; i < 4; i++) {
+		const profile = new Profile('Default');
 
-				let words = H.random.generateWordArray(H.random.generateNumber(1, 10));
+		let words = H.random.generateWordArray(H.random.generateNumber(1, 10));
 
-				words = words.filter(w => !!w);
+		words = words.filter(w => !!w);
 
-				profile.addCategory(
-					new Category(
-						H.guid.generate(),
-						'Kategorie ' + i,
-						H.color.generateRandomHex(),
-						words
-					)
-				);
-			}
-			this.profiles.push(profile);
-		}
+		profile.addCategory(
+			new Category(
+				H.guid.generate(),
+				'Kategorie 1',
+				H.color.generateRandomHex(),
+				words
+			)
+		);
 
+		this.profiles.push(profile);
 		this.currentProfile = this.profiles[0];
 	}
 
