@@ -8,19 +8,47 @@ All notable changes to this project are documented in this file.
 
 - [Changelog](#changelog)
   - [Menu](#menu)
-  - [[Unreleased]](#unreleased)
-  - [[0.3.1-ResetupCode] - 2022-06-16](#031-resetupcode---2022-06-16)
-  - [[0.0.1-ProjectStartup] - 2022-04-11](#001-projectstartup---2022-04-11)
+  - [[1.1.1]](#111)
+    - [Bug fix Category loading](#bug-fix-category-loading)
+  - [[1.1.0]](#110)
+    - [Optic overhaul](#optic-overhaul)
+  - [[1.0.0]](#100)
+    - [First working version](#first-working-version)
+  - [[0.3.1]](#031)
+    - [ResetupCode](#resetupcode)
+  - [[0.0.1]](#001)
+    - [ProjectStartup](#projectstartup)
 
 ---
 
-## [Unreleased]
+## [1.1.1]
 
-## [0.3.1-ResetupCode] - 2022-06-16
+### Bug fix Category loading
+
+- A bug was fixed, that prevented the category loading when one or more Profiles were uploadet.
+
+## [1.1.0]
+
+### Optic overhaul
+
+- A complete overhaul of all assests
+- Optimizing the look and feel
+
+## [1.0.0]
+
+### First working version
+
+- The first working Version
+
+## [0.3.1]
+
+### ResetupCode
 
 - Base Code
 
-## [0.0.1-ProjectStartup] - 2022-04-11
+## [0.0.1]
+
+### ProjectStartup
 
 - ReadMe with project description
 - ChangeLog
