@@ -1,5 +1,7 @@
 # KeywordFinder
 
+[![CodeFactor](https://www.codefactor.io/repository/github/josunlp/keywordfinder/badge)](https://www.codefactor.io/repository/github/josunlp/keywordfinder)
+
 ## Menü
 
 ---
