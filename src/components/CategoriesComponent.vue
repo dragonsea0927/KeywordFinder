@@ -185,7 +185,8 @@ export default defineComponent({
 			confirmSave: ref(false),
 			updateProfileName: ref(false),
 			filterOptions: ref(Array.from(session.profiles, (e) => e.name)),
-			updateName: ref('')
+			updateName: ref(''),
+			prompt: ref(true)
 		};
 	},
 
@@ -344,14 +345,12 @@ export default defineComponent({
 
 .categories
 	display: flex
-	width: 100%
+	width: 80%
 	flex-direction: column
 	align-items: left
 	justify-content: left
 	margin-top: 1rem
 	margin-bottom: 1rem
-	margin-left: 10rem
-	margin-right: 10rem
 
 	.row
 		button
