@@ -1,3 +1,5 @@
+@import "color"
+
 @mixin noselect
 	-webkit-touch-callout: none
 	-webkit-user-select: none
@@ -18,3 +20,12 @@
 	box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.1)
 
 	@include noselect
+
+@mixin basicButton
+	margin: 0.5rem
+	padding: 0.7rem
+	background-color: $third-color
+	color: white
+	height: 3rem
+	border-radius: 1rem
+	cursor: pointer

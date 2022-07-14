@@ -14,6 +14,7 @@
 					color="red"
 					text-color="white"
 					label="App zurücksetzen"
+					class="app-reset-button"
 				></q-btn>
 			</div>
 		</div>
@@ -78,6 +79,7 @@ export default defineComponent({
 
 <style lang="sass">
 @import '../css/mixin'
+@import '../css/color'
 
 .footer
 	display: flex
@@ -89,6 +91,14 @@ export default defineComponent({
 	margin-bottom: 1rem
 	margin-left: 10rem
 	margin-right: 10rem
+
+	.app-reset-button
+		border-radius: 1rem
+		margin-left: 1rem
+		margin-right: 1rem
+		margin-top: 1rem
+		margin-bottom: 1rem
+		cursor: pointer
 
 	.container
 		display: flex
@@ -118,17 +128,17 @@ export default defineComponent({
 				margin-right: 0.2rem
 				margin-bottom: 0rem
 				margin-top: 0.5rem
-				color: #0085a6
+				color: $main-color
 				text-transform: uppercase
 
 				.off
 					@include noselect
 
 				a
-					color: #0085a6
+					color: $main-color
 					text-decoration: none
 					&:hover
-						color: #0085a6
+						color: $main-color
 						text-decoration: underline
 
 						&:visited

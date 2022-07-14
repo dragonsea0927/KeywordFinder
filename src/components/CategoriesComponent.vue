@@ -92,8 +92,8 @@
 			<div class="row category-controls">
 				<p class="col-3">Kategorien</p>
 				<q-btn
-					color="grey col-4"
-					text-color="black"
+					color="col-4"
+					class="category-add-button"
 					label="Kategorie hinzufügen"
 					@click="addCategory"
 				></q-btn>
@@ -342,6 +342,7 @@ export default defineComponent({
 
 <style lang="sass" scoped>
 @import '../css/mixin'
+@import '../css/color'
 
 .categories
 	display: flex
@@ -352,12 +353,17 @@ export default defineComponent({
 	margin-top: 1rem
 	margin-bottom: 1rem
 
+	.category-add-button
+		@include basicButton
+		width: 20rem
+
 	.row
 		button
 			margin-left: 1rem
-			margin-right: 1rem
+			margin-right: 0.5rem
 			max-height: 3rem
-			margin-top: 0.3rem
+			margin-top: 0.2rem
+			border-radius: 1rem
 
 	.category-container
 		display: flex
