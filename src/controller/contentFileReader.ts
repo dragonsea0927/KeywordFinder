@@ -2,7 +2,6 @@
  * Content file reader
  */
 export default class ContentFileReader {
-
 	/**
 	 * File  of content file reader
 	 */
@@ -28,8 +27,7 @@ export default class ContentFileReader {
 			};
 			try {
 				reader.readAsText(this.file);
-			}
-			catch (e) {
+			} catch (e) {
 				resolve('');
 			}
 		});
