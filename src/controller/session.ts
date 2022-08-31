@@ -1,19 +1,18 @@
 import { Category } from 'src/models/CategoryModel';
 import { Profile } from 'src/models/ProfileModel';
-import { H } from 'friendly-helper'
-import Message from './message';
+import { H } from 'friendly-helper';
+import { SimpleToastMessages } from 'simple-toast-messages';
 
 /**
  * Session
  */
 export class Session {
-
 	/**
 	 * Instance  of session
 	 */
 	private static instance: Session;
 
-	private static msg = new Message();
+	private static msg = SimpleToastMessages.getInstance();
 
 	/**
 	 * Gets instance
@@ -40,7 +39,7 @@ export class Session {
 
 		let words = H.random.generateWordArray(H.random.generateNumber(1, 10));
 
-		words = words.filter(w => !!w);
+		words = words.filter((w) => !!w);
 
 		profile.addCategory(
 			new Category(
@@ -151,12 +150,12 @@ export class Session {
 
 		const profile = Session.reBuildProfile(data);
 
-		if (this.instance.profiles.find(p => p.name === profile.name)) {
+		if (this.instance.profiles.find((p) => p.name === profile.name)) {
 			this.msg.error('Profile with name ' + profile.name + ' already exists');
 			return;
 		}
 
-		if (this.instance.profiles.find(p => p.id === profile.id)) {
+		if (this.instance.profiles.find((p) => p.id === profile.id)) {
 			this.msg.error('Profile with id ' + profile.id + ' already exists');
 			return;
 		}
@@ -165,7 +164,7 @@ export class Session {
 		this.instance.currentProfile = profile;
 		Session.save();
 		location.reload();
-		this.msg.success('Profile wurde importiert');
+		this.msg.success('Profile wurde importiert', 3000);
 	}
 
 	/**
@@ -176,9 +175,7 @@ export class Session {
 		const profiles = <Array<Profile>>JSON.parse(json);
 
 		try {
-
-			profiles.forEach(data => {
-
+			profiles.forEach((data) => {
 				if (!data.id || !data.name || !data.categories) {
 					this.msg.error('Import fehlgeschlagen');
 					return;
@@ -186,21 +183,19 @@ export class Session {
 
 				const profile = Session.reBuildProfile(data);
 				if (
-					!this.instance.profiles.find(p => p.name === profile.name)
-					&& !this.instance.profiles.find(p => p.id === profile.id)
+					!this.instance.profiles.find((p) => p.name === profile.name) &&
+					!this.instance.profiles.find((p) => p.id === profile.id)
 				) {
 					this.instance.profiles.push(profile);
 					this.instance.currentProfile = profile;
 				}
-
 			});
-
 		} catch {
 			this.msg.error('Import fehlgeschlagen');
 		}
 		Session.save();
 		location.reload();
-		this.msg.success('Profile wurde importiert');
+		this.msg.success('Profile wurde importiert', 3000);
 	}
 
 	/**
@@ -223,8 +218,10 @@ export class Session {
 	 * @param profile
 	 */
 	public setCurrentProfile(profile: Profile) {
-		if (this.profiles.find(p => p.name === profile.name)) {
-			this.currentProfile = <Profile>this.profiles.find(p => p.name === profile.name);
+		if (this.profiles.find((p) => p.name === profile.name)) {
+			this.currentProfile = <Profile>(
+				this.profiles.find((p) => p.name === profile.name)
+			);
 		} else {
 			this.currentProfile = this.profiles[0];
 		}
@@ -240,7 +237,6 @@ export class Session {
 		this.instance = new Session();
 		Session.save();
 		location.reload();
-		this.msg.info('Session wurde zurückgesetzt');
+		this.msg.info('Session wurde zurückgesetzt', 3000);
 	}
-
 }
