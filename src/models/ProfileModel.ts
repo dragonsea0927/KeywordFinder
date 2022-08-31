@@ -5,7 +5,6 @@ import { Category } from './CategoryModel';
  * Profile model
  */
 export class Profile {
-
 	/**
 	 * Id  of profile
 	 */
@@ -51,7 +50,7 @@ export class Profile {
 	 * @param category
 	 */
 	deleteCategorie(categorie: Category) {
-		this.categories = this.categories.filter(cat => cat.id !== categorie.id);
+		this.categories = this.categories.filter((cat) => cat.id !== categorie.id);
 	}
 
 	/**
@@ -59,7 +58,8 @@ export class Profile {
 	 * @param categories
 	 */
 	deleteMultipleCategories(categories: Array<Category>) {
-		this.categories = this.categories.filter(cat => !categories.includes(cat));
+		this.categories = this.categories.filter(
+			(cat) => !categories.includes(cat)
+		);
 	}
-
 }

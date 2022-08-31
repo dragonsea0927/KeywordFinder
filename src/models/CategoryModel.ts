@@ -2,7 +2,6 @@
  * Categorie model
  */
 export class Category {
-
 	/**
 	 * Id  of categorie
 	 */
