@@ -158,10 +158,10 @@
 import { Category } from 'src/models/CategoryModel';
 import { Profile } from 'src/models/ProfileModel';
 import CategorySubComponent from './CategorySubComponent.vue';
-import { H } from 'friendly-helper';
 import { Session } from 'src/controller/session';
 import { ref, defineComponent } from 'vue';
 import ImportExportComponent from 'src/components/ImportExportComponent.vue';
+import { Helper } from 'src/controller/helper';
 
 export default defineComponent({
 	name: 'CategoriesComponent',
@@ -245,9 +245,9 @@ export default defineComponent({
 				const prof = new Profile('Default 1');
 				prof.addCategory(
 					new Category(
-						H.guid.generate(),
+						crypto.randomUUID(),
 						'Kategorie 1',
-						H.color.generateRandomHex(),
+						Helper.generateRandomHex(),
 						[]
 					)
 				);
@@ -275,7 +275,7 @@ export default defineComponent({
 		newProfile() {
 			let pName = 'Default ' + (this.profiles.length + 1);
 			let pNameList = this.profiles.map((e) => e.name);
-			let newNumber = H.number.getHighestNumberFromStringArray(pNameList) + 1;
+			let newNumber = Helper.getHighestNumberFromStringArray(pNameList) + 1;
 			let session = Session.getInstance();
 
 			if (pNameList.includes(pName)) {
@@ -295,7 +295,7 @@ export default defineComponent({
 		addCategory() {
 			let catName: string = 'Kategorie ' + (this.profile.categories.length + 1);
 			let catNames = this.profile.categories.map((e) => e.name);
-			let newNumber = H.number.getHighestNumberFromStringArray(catNames) + 1;
+			let newNumber = Helper.getHighestNumberFromStringArray(catNames) + 1;
 			let session = Session.getInstance();
 
 			if (catNames.includes(catName)) {
@@ -304,9 +304,9 @@ export default defineComponent({
 
 			this.profile.addCategory(
 				new Category(
-					H.guid.generate(),
+					crypto.randomUUID(),
 					catName,
-					H.color.generateRandomHex(),
+					Helper.generateRandomHex(),
 					[]
 				)
 			);
@@ -333,7 +333,7 @@ export default defineComponent({
 		async updateLoop() {
 			while (true) {
 				this.updateInstanze();
-				await H.general.sleep(1000);
+				await Helper.sleep(1000);
 			}
 		}
 	}

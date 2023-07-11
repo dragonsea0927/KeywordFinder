@@ -8,20 +8,28 @@ All notable changes to this project are documented in this file.
 
 - [Changelog](#changelog)
   - [Menu](#menu)
-  - [[1.2.0]](#120)
+  - [\[1.3.1\]](#131)
+    - [Updates](#updates)
+  - [\[1.2.0\]](#120)
     - [License](#license)
-  - [[1.1.1]](#111)
+  - [\[1.1.1\]](#111)
     - [Bug fix Category loading](#bug-fix-category-loading)
-  - [[1.1.0]](#110)
+  - [\[1.1.0\]](#110)
     - [Optic overhaul](#optic-overhaul)
-  - [[1.0.0]](#100)
+  - [\[1.0.0\]](#100)
     - [First working version](#first-working-version)
-  - [[0.3.1]](#031)
+  - [\[0.3.1\]](#031)
     - [ResetupCode](#resetupcode)
-  - [[0.0.1]](#001)
+  - [\[0.0.1\]](#001)
     - [ProjectStartup](#projectstartup)
 
 ---
+
+## [1.3.1]
+
+### Updates
+
+- Dependency updates
 
 ## [1.2.0]
 

@@ -44,11 +44,12 @@
 
 <script lang="ts">
 import { useQuasar } from 'quasar';
-import { H } from 'friendly-helper';
 import { Session } from 'src/controller/session';
 import { Category } from 'src/models/CategoryModel';
 import { defineComponent, ref } from 'vue';
 import ContentFileReader from 'src/controller/contentFileReader';
+import { Helper } from 'src/controller/helper';
+import StringController from 'src/controller/string';
 
 export default defineComponent({
 	name: 'TextField',
@@ -79,23 +80,23 @@ export default defineComponent({
 	methods: {
 		onInput(value: string) {
 			this.text = this.generateFilteredTextForCategories(
-				H.string.purgeHtml(value)
+				StringController.getInstance().purgeHtml(value)
 			);
 		},
 
 		async onFileInput(f: File) {
 			const content = new ContentFileReader(f);
 			this.text = this.generateFilteredTextForCategories(
-				H.string.purgeHtml(await content.getContent())
+				StringController.getInstance().purgeHtml(await content.getContent())
 			);
 		},
 
 		async rerender(object: Session) {
 			while (object) {
 				this.text = this.generateFilteredTextForCategories(
-					H.string.purgeAll(this.text)
+					StringController.getInstance().purgeAll(this.text)
 				);
-				await H.general.sleep(1000);
+				await Helper.sleep(1000);
 			}
 		},
 
@@ -107,7 +108,7 @@ export default defineComponent({
 			let filteredText = text.replaceAll('&', '');
 			filteredText = filteredText.replaceAll('\\', '');
 			let brightness = '';
-			if (H.color.isDark(color)) {
+			if (Helper.isDark(color)) {
 				brightness = 'color:white';
 			}
 
